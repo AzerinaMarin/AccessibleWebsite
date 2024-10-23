@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Puntuación</title>
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <img src="Trivia Banner.jpg" alt="" class="banner-img">
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="clasificacion.html">Puntuación</a></li>
+                <li><a href="sugerencias.html">Sugerencias</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <table id="tabla-puntuaciones" class="puntuacion-section">
+        <thead>
+            <tr>
+                <th>Categoría</th>
+                <th>Correctas</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>    
+        </tbody>
+    </table>
+    
+                
+            </tbody>
+        </table>
+
+    
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                mostrarPuntuacion();
+            });
+        
+            function mostrarPuntuacion() {
+                const tablaPuntuaciones = document.getElementById("tabla-puntuaciones").getElementsByTagName('tbody')[0];
+                tablaPuntuaciones.innerHTML = ""; // Limpia la tabla existente
+        
+                // Obtenemos las puntuaciones del local storage
+                let puntuaciones = JSON.parse(localStorage.getItem("puntuaciones")) || {};
+        
+                let puntajeTotal = 0;
+                let totalPreguntas = 0;
+        
+                // Mostrar cada puntuación
+                for (const [key, value] of Object.entries(puntuaciones)) {
+                    const fila = document.createElement("tr");
+                    fila.innerHTML = `
+                        <td>${value.categoria}</td>
+                        <td>${value.correctas}</td>
+                        <td>${value.total}</td>
+                    `;
+                    tablaPuntuaciones.appendChild(fila);
+        
+                    puntajeTotal += value.correctas;
+                    totalPreguntas += value.total;
+                }
+        
+                // Mostrar total
+                const filaTotal = document.createElement("tr");
+                filaTotal.innerHTML = `
+                    <td><strong>Total</strong></td>
+                    <td><strong>${puntajeTotal}</strong></td>
+                    <td><strong>${totalPreguntas}</strong></td>
+                `;
+                tablaPuntuaciones.appendChild(filaTotal);
+            }
+        </script>
+           
+        
+</body>
+</html>

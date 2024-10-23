@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Ponte Aprueba</title>
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <img src="Trivia Banner.jpg" alt="" class="banner-img">
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="clasificacion.html">Puntuación</a></li>
+                <li><a href="sugerencias.html">Sugerencias</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Presentación del juego -->
+    <section id="presentacion" class="presentacion-section">
+        <h2>Bienvenidos a Ponte a Prueba</h2> <br>
+        <p>Prepárate para poner a prueba tu conocimiento con este juego interactivo de trivia. Puedes elegir entre varias categorías o jugar preguntas aleatorias para desafiarte a ti mismo. ¡Compite con otros y demuestra quién sabe más!</p>
+    </section>
+
+    <!-- Cómo jugar -->
+    <section id="instrucciones" class="instrucciones-section">
+        <h2>¿Cómo Jugar?</h2><br>
+        <p>Elige una categoría de trivia y responde las preguntas. Gana puntos por cada respuesta correcta. ¡Acumula el máximo puntaje!</p>
+    </section>
+
+    <!-- Botón de preguntas revueltas 
+    <section id="preguntas-revueltas" class="revueltas-section">
+        <h2>¿Listo para un desafío?</h2> <br>
+        <button onclick="randomTrivia()">Jugar Preguntas Revueltas</button>
+    </section>-->
+
+    <section id="categorias" class="categorias-section">
+        <h2>Categorías de Trivia</h2> <br>
+        <div class="categorias-container">
+            <button class="categoria" onclick="window.location.href='cultura-general.html'">Cultura General</button>
+            <button class="categoria" onclick="window.location.href='adivinanzas.html'">Adivinanzas</button>
+            <!--<button class="categoria" onclick="window.location.href=''">Música</button>
+            <button class="categoria" onclick="window.location.href=''">Deportes</button>
+            <button class="categoria" onclick="window.location.href=''">Geografía</button>
+            <button class="categoria" onclick="window.location.href=''">Tecnología</button>-->
+        </div>
+    </section>
+
+  
+</body>
+</html>

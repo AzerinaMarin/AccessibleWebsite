@@ -1,0 +1,221 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fbeee5;
+    padding: 0;
+    margin: 0;
+}
+
+/* Estilos del encabezado */
+header {
+    background-color: #ee7f6b;
+    color: #363636;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.banner-img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Estilos de la navegación */
+nav {
+    background-color: #ee7f6b;
+    padding: 10px 0;
+}
+
+.nav-menu {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.nav-menu a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 15px;
+    background-color: #ffc663;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.nav-menu a:hover {
+    background-color: #fcc019;
+}
+
+/* Sección de presentación */
+.presentacion-section, .instrucciones-section, .revueltas-section, .categorias-section {
+    padding: 20px;
+    text-align: center;
+    background-color: #fbeee5;
+    margin-bottom: 20px;
+}
+
+/* Botón de preguntas revueltas */
+.revueltas-section button {
+    background-color: #6d73ff;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.revueltas-section button:hover {
+    background-color: #6b98d1;
+}
+
+/* Contenedor de las categorías */
+.categorias-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px; 
+    margin: 20px auto;
+    max-width: 1000px; 
+}
+
+/* Estilos para los botones de categorías */
+.categoria{
+    background-color: #373bbb;
+    border: none;
+    color: white;
+    font-weight:bold;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    min-width: 150px; 
+    flex-grow: 1; 
+}
+
+/* Efecto hover en los botones */
+.categoria:hover {
+    background-color: #4b50df;
+}
+
+
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 600px) {
+    .nav-menu {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .categorias-container {
+        flex-direction: column;
+    }
+    .categoria{
+        width: 100%; 
+    }
+    .nav-menu a {
+        display: block;
+        margin-bottom: 10px;
+    }
+}
+
+/* Sección de preguntas */
+.preguntas-section {
+    background-color: white;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.preguntas-section h2 {
+    text-align: center;
+    color: #333;
+}
+
+.opciones-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.opciones-container button {
+    background-color: #373BBB;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.opciones-container button:hover {
+    background-color: #4b50df;
+}
+
+/* Feedback de la respuesta */
+#feedback-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#feedback-container button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+#feedback-container button:hover {
+    background-color: #555;
+}
+
+/* Tabla de puntuación */
+.puntuacion-section {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.puntuacion-section h3 {
+    text-align: center;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+table th {
+    background-color: #373BBB;
+    color: white;
+}
+
+table td {
+    background-color: #f4f4f4;
+}
