@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Sugerencias</title>
+</head>
+<body>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f8f8;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #108610;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2f9c2f;
+        }
+    </style>
+
+    <header>
+        <div class="banner">
+            <img src="Trivia Banner.jpg" alt="" class="banner-img">
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="clasificacion.html">Puntuación</a></li>
+                <li><a href="sugerencias.html">Sugerencias</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+        <form id="sugerencias-form">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" required placeholder="Tu nombre">
+
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" id="correo" required placeholder="Tu correo electrónico">
+
+            <label for="sugerencia">Sugerencia:</label>
+            <textarea id="sugerencia" rows="4" required placeholder="Escribe tu sugerencia aquí..."></textarea>
+
+            <button type="submit">Enviar Sugerencia</button>
+        </form>
+    </main>
+
+    <script>
+        // Manejar el envío del formulario
+        document.getElementById('sugerencias-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío normal del formulario
+
+            // Mostrar alerta de confirmación
+            alert("¡Gracias por tu sugerencia!");
+
+            // Limpiar el formulario
+            this.reset();
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Adivinanzas</title>
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <img src="Trivia Banner.jpg" alt="" class="banner-img">
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="clasificacion.html">Puntuación</a></li>
+                <li><a href="sugerencias.html">Sugerencias</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    
+    <!-- Sección de preguntas de Cultura General -->
+    <section class="preguntas-section">
+        <h2>Responde las siguientes preguntas</h2>
+
+        <div id="pregunta-container">
+            <p id="pregunta-text"></p>
+
+            <div class="opciones-container">
+                <button class="opcion" onclick="seleccionarRespuesta(0)">Opción 1</button>
+                <button class="opcion" onclick="seleccionarRespuesta(1)">Opción 2</button>
+                <button class="opcion" onclick="seleccionarRespuesta(2)">Opción 3</button>
+                <button class="opcion" onclick="seleccionarRespuesta(3)">Opción 4</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Preguntas de Adivinanzas para Adultos
+        const preguntasAdivinanzas = [
+            {
+                pregunta: "En la casa de mi abuela tengo una caja que siempre guarda cosas, aunque no tenga vida. ¿Qué es?",
+                opciones: ["El horno", "El refrigerador", "La despensa", "La cocina"],
+                respuestaCorrecta: 1
+            },
+            {
+                pregunta: "¿Qué es lo que nunca se moja aunque esté en el agua?",
+                opciones: ["La sombra", "El pez", "La botella", "El barco"],
+                respuestaCorrecta: 0
+            },
+            {
+                pregunta: "Más grande que un elefante, pero no pesa nada. ¿Qué es?",
+                opciones: ["La sombra", "El aire", "La luna", "El sol"],
+                respuestaCorrecta: 0
+            },
+            {
+                pregunta: "Adivina, adivinador: ¿Qué es lo que corre, pero nunca camina; tiene una boca, pero nunca habla?",
+                opciones: ["El río", "La carretera", "El tiempo", "El viento"],
+                respuestaCorrecta: 0
+            },
+            {
+                pregunta: "Tengo agujas y no sé coser. ¿Qué soy?",
+                opciones: ["El reloj", "La brújula", "El compás", "El tenedor"],
+                respuestaCorrecta: 0
+            },
+            {
+                pregunta: "Si me nombras, desaparezco. ¿Qué soy?",
+                opciones: ["El eco", "La sombra", "El silencio", "El tiempo"],
+                respuestaCorrecta: 2
+            },
+            {
+                pregunta: "En la guerra es mi enemigo, en la paz soy tu amigo. ¿Qué soy?",
+                opciones: ["El fuego", "El tiempo", "La tristeza", "La soledad"],
+                respuestaCorrecta: 1
+            },
+            {
+                pregunta: "No es un pez, pero vive en el agua. No es un pájaro, pero vuela. ¿Qué es?",
+                opciones: ["El pez", "El murciélago", "La rana", "La gaviota"],
+                respuestaCorrecta: 1
+            },
+            {
+                pregunta: "Siempre está en el suelo, aunque nunca lo tocas. ¿Qué es?",
+                opciones: ["La tierra", "El polvo", "La sombra", "La hierba"],
+                respuestaCorrecta: 0
+            },
+            {
+                pregunta: "Adivina, adivinador: ¿Qué tiene agujeros y puede contener agua?",
+                opciones: ["La esponja", "La red", "La coladera", "La bolsa"],
+                respuestaCorrecta: 0
+            }
+        ];
+    
+        let preguntaActual = 0;
+        let respuestasCorrectas = 0;
+    
+        // Muestra la primera pregunta
+        function mostrarPregunta() {
+            const preguntaTexto = document.getElementById("pregunta-text");
+            const opciones = document.querySelectorAll(".opcion");
+    
+            // Actualiza el texto de la pregunta
+            preguntaTexto.textContent = preguntasAdivinanzas[preguntaActual].pregunta;
+    
+            // Actualiza las opciones de respuesta
+            opciones.forEach((boton, index) => {
+                boton.textContent = preguntasAdivinanzas[preguntaActual].opciones[index];
+            });
+        }
+    
+        // Lógica para seleccionar una respuesta
+        function seleccionarRespuesta(opcionSeleccionada) {
+            if (opcionSeleccionada === preguntasAdivinanzas[preguntaActual].respuestaCorrecta) {
+                respuestasCorrectas++;
+            }
+    
+            // Avanza a la siguiente pregunta
+            preguntaActual++;
+    
+            if (preguntaActual < preguntasAdivinanzas.length) {
+                mostrarPregunta();
+            } else {
+                // Guarda la puntuación en localStorage en el formato correcto
+                let puntuaciones = JSON.parse(localStorage.getItem("puntuaciones")) || {};
+                puntuaciones["puntuacion_Adivinanzas"] = {
+                    categoria: "Adivinanzas",
+                    correctas: respuestasCorrectas,
+                    total: preguntasAdivinanzas.length
+                };
+                localStorage.setItem("puntuaciones", JSON.stringify(puntuaciones));
+    
+                // Redirige a la página de clasificación al terminar
+                window.location.href = "clasificacion.html";
+            }
+        }
+    
+        // Inicializa el juego mostrando la primera pregunta
+        window.onload = mostrarPregunta;
+    </script>    
+
+</body>
+</html>
