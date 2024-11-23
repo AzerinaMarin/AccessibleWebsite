@@ -21,112 +21,168 @@
         </nav>
     </header>
 
-    <!-- Sección de preguntas de Cultura General -->
-    <section class="preguntas-section">
-        <h2>Responde las siguientes preguntas</h2>
-
-        <div id="contenedor-imagen" style="display: flex; justify-content: center; align-items: center;">
-            <img id="pregunta-imagen" src="PiramidesGiza.jpg" alt="Piramides de Giza" style="display: none; max-width: 50%; height: auto;">
-        </div>
-             
-            <div id="pregunta-text"></div>
-            <div class="opciones-container">
-        <button class="opcion" onclick="seleccionarRespuesta(0)"></button>
-        <button class="opcion" onclick="seleccionarRespuesta(1)"></button>
-        <button class="opcion" onclick="seleccionarRespuesta(2)"></button>
-        <button class="opcion" onclick="seleccionarRespuesta(3)"></button>
+        <section class="preguntas-section">
+            <h2>Responde las siguientes preguntas</h2>
+    
+            <div id="contenedor-imagen" style="display: flex; justify-content: center; align-items: center;">
+                <img id="pregunta-imagen" src="PiramidesGiza.jpg" alt="Piramides de Giza" style="display: none; max-width: 50%; height: auto;">
             </div>
-        
-    </section>
+    
+            <div id="pregunta-text"></div>
+            <div id="opciones-container"></div>
+            <button id="siguiente" style="display: none;" onclick="validarCheckbox()">Siguiente</button>
+        </section>
+    
+        <script>
+            // Preguntas de Cultura General
+            const preguntas = [
+                {
+                    pregunta: "¿Cuál es la capital de Francia?",
+                    opciones: ["Madrid", "París", "Londres", "Roma"],
+                    respuestaCorrecta: 1,
+                    tipo: "boton"
+                },
+                {
+                    pregunta: "¿En qué país se encuentra esta maravilla del mundo?",
+                    opciones: ["Egipto", "España", "México", "Portugal"],
+                    respuestaCorrecta: 0,
+                    imagen: "PiramidesGiza.jpg",
+                    tipo: "boton"
+                },
+                {
+                    pregunta: "¿Cuáles son colores primarios?",
+                    opciones: ["Rojo", "Verde", "Azul", "Amarillo"],
+                    respuestaCorrecta: [0, 2, 3],
+                    tipo: "checkbox"
+                },
+                {
+                    pregunta: "¿Qué planetas son gaseosos?",
+                    opciones: ["Marte", "Júpiter", "Saturno", "Urano"],
+                    respuestaCorrecta: [1, 2, 3],
+                    tipo: "checkbox"
+                },
+                {
+                    pregunta: "¿Qué animales son mamíferos?",
+                    opciones: ["Delfín", "Tiburón", "Murciélago", "Pingüino"],
+                    respuestaCorrecta: [0, 2],
+                    tipo: "checkbox"
+                },
+                {
+                    pregunta: "¿Quién pintó la Mona Lisa?",
+                    opciones: ["Miguel Ángel", "Vincent Van Gogh", "Leonardo Da Vinci", "Pablo Picasso"],
+                    respuestaCorrecta: 2,
+                    tipo: "boton"
+                },
+                {
+                    pregunta: "¿En qué año llegó el hombre a la luna?",
+                    opciones: ["1965", "1969", "1972", "1958"],
+                    respuestaCorrecta: 1,
+                    tipo: "boton"
+                },
+                {
+                    pregunta: "¿Cuál es el océano más grande del mundo?",
+                    opciones: ["Atlántico", "Pacífico", "Índico", "Ártico"],
+                    respuestaCorrecta: 1,
+                    tipo: "boton"
+                },
+                {
+                    pregunta: "¿Cuál es el metal más ligero?",
+                    opciones: ["Hierro", "Plata", "Litio", "Mercurio"],
+                    respuestaCorrecta: 2,
+                    tipo: "boton"
+                },
+                {
+                    pregunta: "¿Qué científico propuso la teoría de la relatividad?",
+                    opciones: ["Isaac Newton", "Galileo Galilei", "Albert Einstein", "Marie Curie"],
+                    respuestaCorrecta: 2,
+                    tipo: "boton"
+                }
 
-    <script>
-        // Preguntas de Cultura General
-        const preguntas = [
-            {
-                pregunta: "¿Cuál es la capital de Francia?",
-                opciones: ["Madrid", "París", "Londres", "Roma"],
-                respuestaCorrecta: 1
-            },
-            {
-                pregunta: "¿En qué país se encuentra esta maravilla del mundo?",
-                opciones: ["Egipto", "España", "México", "Portugal"],
-                respuestaCorrecta: 0,
-                imagen: "PiramidesGiza.jpg" 
-            },
-            {
-                pregunta: "¿Quién pintó la Mona Lisa?",
-                opciones: ["Miguel Ángel", "Vincent Van Gogh", "Leonardo Da Vinci", "Pablo Picasso"],
-                respuestaCorrecta: 2
-            },
-            {
-                pregunta: "¿En qué año llegó el hombre a la luna?",
-                opciones: ["1965", "1969", "1972", "1958"],
-                respuestaCorrecta: 1
-            },
-            {
-                pregunta: "¿Cuál es el país más grande del mundo?",
-                opciones: ["Estados Unidos", "Canadá", "Rusia", "China"],
-                respuestaCorrecta: 2
-            },
-            {
-                pregunta: "¿Cuál es el océano más grande del mundo?",
-                opciones: ["Atlántico", "Pacífico", "Índico", "Ártico"],
-                respuestaCorrecta: 1
-            },
-            {
-                pregunta: "¿Quién fue el primer presidente de los Estados Unidos?",
-                opciones: ["Abraham Lincoln", "George Washington", "Thomas Jefferson", "John Adams"],
-                respuestaCorrecta: 1
-            },
-            {
-                pregunta: "¿Qué idioma se habla en Brasil?",
-                opciones: ["Español", "Portugués", "Francés", "Inglés"],
-                respuestaCorrecta: 1
-            },
-            {
-                pregunta: "¿Cuál es el metal más ligero?",
-                opciones: ["Hierro", "Plata", "Litio", "Mercurio"],
-                respuestaCorrecta: 2
-            },
-            {
-                pregunta: "¿Qué científico propuso la teoría de la relatividad?",
-                opciones: ["Isaac Newton", "Galileo Galilei", "Albert Einstein", "Marie Curie"],
-                respuestaCorrecta: 2
-            }
-        ];
-
-        let preguntaActual = 0;
+            ];
+    
+            let preguntaActual = 0;
         let respuestasCorrectas = 0;
 
-        // Muestra la primera pregunta
         function mostrarPregunta() {
             const preguntaTexto = document.getElementById("pregunta-text");
-            const opciones = document.querySelectorAll(".opcion");
+            const opcionesContainer = document.getElementById("opciones-container");
             const imagenElemento = document.getElementById("pregunta-imagen");
+            const botonSiguiente = document.getElementById("siguiente");
 
-            // Actualiza el texto de la pregunta
-            preguntaTexto.textContent = preguntas[preguntaActual].pregunta;
+            opcionesContainer.innerHTML = "";
 
-            // Actualiza las opciones de respuesta
-            opciones.forEach((boton, index) => {
-                boton.textContent = preguntas[preguntaActual].opciones[index];
-            });
-            
-            if (preguntas[preguntaActual].imagen) {
-        imagenElemento.src = preguntas[preguntaActual].imagen;
-        imagenElemento.style.display = "block"; // Muestra la imagen
-    } else {
-        imagenElemento.style.display = "none"; // Oculta la imagen si no existe
-    }
-        }
+            const pregunta = preguntas[preguntaActual];
+            preguntaTexto.textContent = pregunta.pregunta;
 
-        // Lógica para seleccionar una respuesta
-        function seleccionarRespuesta(opcionSeleccionada) {
-            if (opcionSeleccionada === preguntas[preguntaActual].respuestaCorrecta) {
-                respuestasCorrectas++;
+            if (pregunta.imagen) {
+                imagenElemento.src = pregunta.imagen;
+                imagenElemento.style.display = "block";
+            } else {
+                imagenElemento.style.display = "none";
             }
 
-            // Avanza a la siguiente pregunta
+            if (pregunta.tipo === "boton") {
+                botonSiguiente.style.display = "none";
+                for (let i = 0; i < pregunta.opciones.length; i++) {
+                    const boton = document.createElement("button");
+                    boton.textContent = pregunta.opciones[i];
+                    boton.className = "opcion";
+                    boton.onclick = () => seleccionarRespuesta(i);
+                    opcionesContainer.appendChild(boton);
+                }
+            } else if (pregunta.tipo === "checkbox") {
+                botonSiguiente.style.display = "block";
+                for (let i = 0; i < pregunta.opciones.length; i++) {
+                    const checkbox = document.createElement("div");
+                    checkbox.setAttribute("role", "checkbox");
+                    checkbox.setAttribute("aria-checked", "false");
+                    checkbox.setAttribute("tabindex", "0");
+                    checkbox.id = `checkbox-${i}`;
+                    checkbox.textContent = pregunta.opciones[i];
+
+                    checkbox.onclick = () => toggleCheckbox(checkbox);
+                    checkbox.onkeydown = (e) => {
+                        if (e.key === " " || e.key === "Enter") {
+                            e.preventDefault();
+                            toggleCheckbox(checkbox);
+                        }
+                    };
+
+                    opcionesContainer.appendChild(checkbox);
+                }
+            }
+        }
+
+        function toggleCheckbox(checkbox) {
+            const isChecked = checkbox.getAttribute("aria-checked") === "true";
+            checkbox.setAttribute("aria-checked", !isChecked);
+            checkbox.classList.toggle("checked", !isChecked);
+        }
+
+        function seleccionarRespuesta(opcionSeleccionada) {
+            const pregunta = preguntas[preguntaActual];
+            if (opcionSeleccionada === pregunta.respuestaCorrecta) {
+                respuestasCorrectas++;
+            }
+            avanzarPregunta();
+        }
+
+        function validarCheckbox() {
+            const pregunta = preguntas[preguntaActual];
+            const seleccionados = Array.from(
+                document.querySelectorAll(`#opciones-container [role="checkbox"][aria-checked="true"]`)
+            ).map((checkbox) => parseInt(checkbox.id.split("-")[1]));
+
+            const esCorrecto =
+                JSON.stringify(seleccionados.sort()) === JSON.stringify(pregunta.respuestaCorrecta.sort());
+
+            if (esCorrecto) {
+                respuestasCorrectas++;
+            }
+            avanzarPregunta();
+        }
+
+        function avanzarPregunta() {
             preguntaActual++;
 
             if (preguntaActual < preguntas.length) {
@@ -146,8 +202,9 @@
             }
         }
 
-        // Inicializa el juego mostrando la primera pregunta
+
         window.onload = mostrarPregunta;
     </script>
+
 </body>
 </html>

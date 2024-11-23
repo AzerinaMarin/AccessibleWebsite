@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Puntuación</title>
 </head>
+
 <body>
     <header>
         <div class="banner">
@@ -20,63 +22,95 @@
         </nav>
     </header>
 
-    <table id="tabla-puntuaciones" class="puntuacion-section">
-        <thead>
-            <tr>
-                <th>Categoría</th>
-                <th>Correctas</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>    
-        </tbody>
-    </table>
-    
-                
-            </tbody>
-        </table>
+    <div role="table" aria-label="Puntuaciones" aria-describedby="tabla-puntuaciones-desc">
+        <!-- Descripción accesible -->
+        <div id="tabla-puntuaciones-desc" style="display: none;">
+            Tabla que muestra la categoría, la cantidad de respuestas correctas y el total de preguntas respondidas.
+        </div>
 
-    
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                mostrarPuntuacion();
-            });
-        
-            function mostrarPuntuacion() {
-                const tablaPuntuaciones = document.getElementById("tabla-puntuaciones").getElementsByTagName('tbody')[0];
-                tablaPuntuaciones.innerHTML = ""; // Limpia la tabla existente
-        
-                // Obtenemos las puntuaciones del local storage
-                let puntuaciones = JSON.parse(localStorage.getItem("puntuaciones")) || {};
-        
-                let puntajeTotal = 0;
-                let totalPreguntas = 0;
-        
-                // Mostrar cada puntuación
-                for (const [key, value] of Object.entries(puntuaciones)) {
-                    const fila = document.createElement("tr");
-                    fila.innerHTML = `
-                        <td>${value.categoria}</td>
-                        <td>${value.correctas}</td>
-                        <td>${value.total}</td>
-                    `;
-                    tablaPuntuaciones.appendChild(fila);
-        
-                    puntajeTotal += value.correctas;
-                    totalPreguntas += value.total;
-                }
-        
-                // Mostrar total
-                const filaTotal = document.createElement("tr");
-                filaTotal.innerHTML = `
-                    <td><strong>Total</strong></td>
-                    <td><strong>${puntajeTotal}</strong></td>
-                    <td><strong>${totalPreguntas}</strong></td>
-                `;
-                tablaPuntuaciones.appendChild(filaTotal);
+        <!-- Grupo de encabezados -->
+        <div role="rowgroup">
+            <div role="row">
+                <span role="columnheader">Categoría</span>
+                <span role="columnheader">Correctas</span>
+                <span role="columnheader">Respondidas</span>
+            </div>
+        </div>
+
+        <!-- Grupo de filas de datos -->
+        <div role="rowgroup" id="tabla-cuerpo">
+            <!-- Se va a ir agregando los aciertos de acuerdo a las categorías respondidas -->
+        </div>
+    </div>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            mostrarPuntuacion();
+        });
+
+        function mostrarPuntuacion() {
+            const tablaCuerpo = document.getElementById("tabla-cuerpo");
+            tablaCuerpo.innerHTML = ""; // Limpia la tabla existente
+
+            // puntuaciones del local storage
+            let puntuaciones = JSON.parse(localStorage.getItem("puntuaciones")) || {};
+
+            let puntajeTotal = 0;
+            let totalPreguntas = 0;
+
+            // Mostrar cada puntuación
+            for (const [key, value] of Object.entries(puntuaciones)) {
+                const fila = document.createElement("div");
+                fila.setAttribute("role", "row");
+
+                const celdaCategoria = document.createElement("span");
+                celdaCategoria.setAttribute("role", "cell");
+                celdaCategoria.textContent = value.categoria;
+
+                const celdaCorrectas = document.createElement("span");
+                celdaCorrectas.setAttribute("role", "cell");
+                celdaCorrectas.textContent = value.correctas;
+
+                const celdaRespondidas = document.createElement("span");
+                celdaRespondidas.setAttribute("role", "cell");
+                celdaRespondidas.textContent = value.total;
+
+                fila.appendChild(celdaCategoria);
+                fila.appendChild(celdaCorrectas);
+                fila.appendChild(celdaRespondidas);
+                tablaCuerpo.appendChild(fila);
+
+                puntajeTotal += value.correctas;
+                totalPreguntas += value.total;
             }
-        </script>
-           
-        
+
+            // Mostrar total
+            const filaTotal = document.createElement("div");
+            filaTotal.setAttribute("role", "row");
+
+            const celdaTotalEtiqueta = document.createElement("span");
+            celdaTotalEtiqueta.setAttribute("role", "cell");
+            celdaTotalEtiqueta.innerHTML = "<strong>Total</strong>";
+
+            const celdaTotalCorrectas = document.createElement("span");
+            celdaTotalCorrectas.setAttribute("role", "cell");
+            celdaTotalCorrectas.innerHTML = `<strong>${puntajeTotal}</strong>`;
+
+            const celdaTotalRespondidas = document.createElement("span");
+            celdaTotalRespondidas.setAttribute("role", "cell");
+            celdaTotalRespondidas.innerHTML = `<strong>${totalPreguntas}</strong>`;
+
+            filaTotal.appendChild(celdaTotalEtiqueta);
+            filaTotal.appendChild(celdaTotalCorrectas);
+            filaTotal.appendChild(celdaTotalRespondidas);
+            tablaCuerpo.appendChild(filaTotal);
+        }
+
+    </script>
+
+
 </body>
+
 </html>

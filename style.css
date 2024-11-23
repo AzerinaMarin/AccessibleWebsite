@@ -184,7 +184,7 @@ nav {
     background-color: #555;
 }
 
-/* Tabla de puntuación */
+/* Tabla de puntuación 
 .puntuacion-section {
     background-color: #fff;
     padding: 20px;
@@ -219,3 +219,160 @@ table th {
 table td {
     background-color: #f4f4f4;
 }
+*/
+[role="table"] {
+    display: grid;
+    gap: 5px;
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+[role="rowgroup"] {
+    display: grid;
+    gap: 2px;
+}
+
+[role="row"] {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+[role="row"]:last-child {
+    border-bottom: none; /* Elimina la línea de la última fila */
+}
+
+[role="columnheader"] {
+    font-weight: bold;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 5px;
+}
+
+[role="cell"] {
+    text-align: center;
+    padding: 5px;
+}
+
+    /* Estilos generales para la sección */
+    .preguntas-section {
+        font-family: Arial, sans-serif;
+        margin: 20px auto;
+        padding: 10px;
+        max-width: 600px; /* Ancho máximo para centrar contenido */
+        text-align: center; /* Centra el texto en la sección */
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    #pregunta-text {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+        color: #555;
+    }
+
+    #contenedor-imagen {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #contenedor-imagen img {
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Estilo para las opciones de botones */
+    button.opcion {
+        display: block;
+        width: 100%;
+        max-width: 400px;
+        margin: 10px auto;
+        padding: 10px;
+        font-size: 1em;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button.opcion:hover {
+        background-color: #0056b3;
+    }
+
+    button.opcion:focus {
+        outline: 2px solid #80bdff;
+        outline-offset: 2px;
+    }
+
+    /* Estilo para los checkboxes */
+    [role="checkbox"] {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start; /* Asegura que el texto esté alineado a la izquierda */
+        padding: 8px;
+        margin: 8px auto;
+        width: 100%;
+        max-width: 400px;
+        font-size: 1em;
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    [role="checkbox"] span {
+        margin-left: 10px; /* Espacio entre el recuadro y el texto */
+    }
+
+    [role="checkbox"]:hover {
+        background-color: #f9f9f9;
+    }
+
+    [role="checkbox"][aria-checked="true"] {
+        background-color: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+    [role="checkbox"]:focus {
+        outline: 2px solid #80bdff;
+        outline-offset: 2px;
+    }
+
+    /* Estilo para el botón siguiente */
+    #siguiente {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        font-size: 1em;
+        color: white;
+        background-color: #28a745;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #siguiente:hover {
+        background-color: #218838;
+    }
+
+    #siguiente:focus {
+        outline: 2px solid #80bdff;
+        outline-offset: 2px;
+    }
