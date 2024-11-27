@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Música</title>
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <img src="Trivia Banner.jpg" alt="" class="banner-img">
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="clasificacion.html">Puntuación</a></li>
+                <li><a href="sugerencias.html">Sugerencias</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="preguntas-section">
+        <h2>Responde las siguientes preguntas</h2>
+
+        <div id="pregunta-container">
+            <p id="pregunta-text"></p>
+
+            <div class="opciones-container">
+                <button class="opcion" onclick="seleccionarRespuesta(0), clickSound.play();">Opción 1</button>
+                <button class="opcion" onclick="seleccionarRespuesta(1), clickSound.play();">Opción 2</button>
+                <button class="opcion" onclick="seleccionarRespuesta(2), clickSound.play();">Opción 3</button>
+                <button class="opcion" onclick="seleccionarRespuesta(3), clickSound.play();">Opción 4</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        
+        const preguntasMusica = [
+    {
+        pregunta: "¿Quién es conocido como el Rey del Pop?",
+        opciones: ["Elvis Presley", "Michael Jackson", "Prince", "Freddie Mercury"],
+        respuestaCorrecta: 1
+    },
+    {
+        pregunta: "¿Qué instrumento tiene 88 teclas?",
+        opciones: ["El piano", "El violín", "La guitarra", "El arpa"],
+        respuestaCorrecta: 0
+    },
+    {
+        pregunta: "¿Cuál es el género musical que nació en Nueva Orleans a finales del siglo XIX?",
+        opciones: ["El jazz", "El blues", "El rock", "El reggae"],
+        respuestaCorrecta: 0
+    },
+    {
+        pregunta: "¿Qué banda británica lanzó el álbum *Abbey Road* en 1969?",
+        opciones: ["The Rolling Stones", "The Beatles", "Pink Floyd", "Led Zeppelin"],
+        respuestaCorrecta: 1
+    },
+    {
+        pregunta: "¿Qué cantante es conocida como 'La Reina del Soul'?",
+        opciones: ["Aretha Franklin", "Whitney Houston", "Beyoncé", "Tina Turner"],
+        respuestaCorrecta: 0
+    },
+    {
+        pregunta: "¿Qué cantante popularizó la canción *Shape of You*?",
+        opciones: ["Ed Sheeran", "Bruno Mars", "Sam Smith", "Shawn Mendes"],
+        respuestaCorrecta: 0
+    },
+    {
+        pregunta: "¿En qué década se popularizó la música disco?",
+        opciones: ["En los 60", "En los 70", "En los 80", "En los 90"],
+        respuestaCorrecta: 1
+    },
+    {
+        pregunta: "¿Cuál de estos es un instrumento de viento?",
+        opciones: ["El violonchelo", "El clarinete", "La batería", "El bajo"],
+        respuestaCorrecta: 1
+    },
+    {
+        pregunta: "¿Qué compositor es conocido por sus sinfonías como la 'Novena Sinfonía'?",
+        opciones: ["Mozart", "Bach", "Beethoven", "Chopin"],
+        respuestaCorrecta: 2
+    },
+    {
+        pregunta: "¿Qué grupo musical creó la canción *Bohemian Rhapsody*?",
+        opciones: ["Queen", "The Beatles", "Nirvana", "AC/DC"],
+        respuestaCorrecta: 0
+    }
+];
+
+    
+        let preguntaActual = 0;
+        let respuestasCorrectas = 0;
+        const clickSound = new Audio('click-sound.mp3.mpeg');
+    
+        // Muestra la primera pregunta
+        function mostrarPregunta() {
+            const preguntaTexto = document.getElementById("pregunta-text");
+            const opciones = document.querySelectorAll(".opcion");
+    
+            // Actualiza el texto de la pregunta
+            preguntaTexto.textContent = preguntasMusica[preguntaActual].pregunta;
+    
+            // Actualiza las opciones de respuesta
+            opciones.forEach((boton, index) => {
+                boton.textContent = preguntasMusica[preguntaActual].opciones[index];
+            });
+        }
+    
+        // Lógica para seleccionar una respuesta
+        function seleccionarRespuesta(opcionSeleccionada) {
+            if (opcionSeleccionada === preguntasMusica[preguntaActual].respuestaCorrecta) {
+                respuestasCorrectas++;
+            }
+    
+            // Avanza a la siguiente pregunta
+            preguntaActual++;
+    
+            if (preguntaActual < preguntasMusica.length) {
+                mostrarPregunta();
+            } else {
+                // Guarda la puntuación en localStorage en el formato correcto
+                let puntuaciones = JSON.parse(localStorage.getItem("puntuaciones")) || {};
+                puntuaciones["puntuacion_Musica"] = {
+                    categoria: "Música",
+                    correctas: respuestasCorrectas,
+                    total: preguntasMusica.length
+                };
+                localStorage.setItem("puntuaciones", JSON.stringify(puntuaciones));
+    
+                // Redirige a la página de clasificación al terminar
+                clickSound.play()
+                window.location.href = "clasificacion.html";
+            }
+        }
+    
+        // Inicializa el juego mostrando la primera pregunta
+        window.onload = mostrarPregunta;
+    </script>    
+
+</body>
+</html>

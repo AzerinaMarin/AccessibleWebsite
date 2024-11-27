@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Tecnología</title>
+</head>
+
+<body>
+    <header>
+        <div class="banner">
+            <img src="Trivia Banner.jpg" alt="" class="banner-img">
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="clasificacion.html">Puntuación</a></li>
+                <li><a href="sugerencias.html">Sugerencias</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="preguntas-section">
+        <h2>Responde las siguientes preguntas</h2>
+
+        <div id="pregunta-container">
+            <p id="pregunta-text"></p>
+
+            <div class="opciones-container">
+                <button class="opcion" onclick="seleccionarRespuesta(0), clickSound.play();">Opción 1</button>
+                <button class="opcion" onclick="seleccionarRespuesta(1), clickSound.play();">Opción 2</button>
+                <button class="opcion" onclick="seleccionarRespuesta(2), clickSound.play();">Opción 3</button>
+                <button class="opcion" onclick="seleccionarRespuesta(3), clickSound.play();">Opción 4</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const preguntasTecnologia = [
+            {
+                pregunta: "¿Quién es considerado el padre de la computadora?",
+                opciones: ["Alan Turing", "Bill Gates", "Steve Jobs", "Charles Babbage"],
+                respuestaCorrecta: 3
+            },
+            {
+                pregunta: "¿Qué significa la sigla CPU?",
+                opciones: ["Central Processing Unit", "Computer Personal Unit", "Coded Processing Unit", "Control Panel Unit"],
+                respuestaCorrecta: 0
+            },
+            {
+                pregunta: "¿Cuál fue el primer navegador web ampliamente utilizado?",
+                opciones: ["Netscape Navigator", "Internet Explorer", "Chrome", "Mozilla Firefox"],
+                respuestaCorrecta: 0
+            },
+            {
+                pregunta: "¿Qué sistema operativo fue desarrollado originalmente por Apple?",
+                opciones: ["Windows", "macOS", "Linux", "Android"],
+                respuestaCorrecta: 1
+            },
+            {
+                pregunta: "¿Cuál de estas no es una unidad de almacenamiento?",
+                opciones: ["RAM", "HDD", "SSD", "USB"],
+                respuestaCorrecta: 0
+            },
+            {
+                pregunta: "¿Qué lenguaje de programación se usa comúnmente para crear sitios web?",
+                opciones: ["Java", "Python", "C++", "HTML"],
+                respuestaCorrecta: 3
+            },
+            {
+                pregunta: "¿En qué año se lanzó el primer iPhone?",
+                opciones: ["2005", "2007", "2009", "2011"],
+                respuestaCorrecta: 1
+            },
+            {
+                pregunta: "¿Cuál de estas no es una red social?",
+                opciones: ["Google", "Facebook", "Twitter", "Instagram"],
+                respuestaCorrecta: 0
+            },
+            {
+                pregunta: "¿Qué significa la sigla IoT?",
+                opciones: ["Internet of Things", "Internet Operating Technology", "Information Over Time", "Interactive Online Telephony"],
+                respuestaCorrecta: 0
+            },
+            {
+                pregunta: "¿Quién fundó Microsoft?",
+                opciones: ["Steve Jobs", "Mark Zuckerberg", "Bill Gates", "Larry Page"],
+                respuestaCorrecta: 2
+            }
+        ];
+
+        let preguntaActual = 0;
+        let respuestasCorrectas = 0;
+        const clickSound = new Audio('click-sound.mp3.mpeg');
+
+        // Muestra la primera pregunta
+        function mostrarPregunta() {
+            const preguntaTexto = document.getElementById("pregunta-text");
+            const opciones = document.querySelectorAll(".opcion");
+
+            // Actualiza el texto de la pregunta
+            preguntaTexto.textContent = preguntasTecnologia[preguntaActual].pregunta;
+
+            // Actualiza las opciones de respuesta
+            opciones.forEach((boton, index) => {
+                boton.textContent = preguntasTecnologia[preguntaActual].opciones[index];
+            });
+        }
+
+        // Lógica para seleccionar una respuesta
+        function seleccionarRespuesta(opcionSeleccionada) {
+            if (opcionSeleccionada === preguntasTecnologia[preguntaActual].respuestaCorrecta) {
+                respuestasCorrectas++;
+            }
+
+            // Avanza a la siguiente pregunta
+            preguntaActual++;
+
+            if (preguntaActual < preguntasTecnologia.length) {
+                mostrarPregunta();
+            } else {
+                // Guarda la puntuación en localStorage en el formato correcto
+                let puntuaciones = JSON.parse(localStorage.getItem("puntuaciones")) || {};
+                puntuaciones["puntuacion_Tecnologia"] = {
+                    categoria: "Tecnología",
+                    correctas: respuestasCorrectas,
+                    total: preguntasTecnologia.length
+                };
+                localStorage.setItem("puntuaciones", JSON.stringify(puntuaciones));
+
+                // Redirige a la página de clasificación al terminar
+                window.location.href = "clasificacion.html";
+            }
+        }
+
+        // Inicializa el juego mostrando la primera pregunta
+        window.onload = mostrarPregunta;
+    </script>
+
+</body>
+
+</html>

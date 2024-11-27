@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trivia - Cultura General</title>
+    <title>Cultura General</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -30,7 +30,7 @@
     
             <div id="pregunta-text"></div>
             <div id="opciones-container"></div>
-            <button id="siguiente" style="display: none;" onclick="validarCheckbox()">Siguiente</button>
+            <button id="siguiente" style="display: none;" onclick="validarCheckbox(), clickSound.play();">Siguiente</button>
         </section>
     
         <script>
@@ -100,8 +100,9 @@
 
             ];
     
-            let preguntaActual = 0;
+        let preguntaActual = 0;
         let respuestasCorrectas = 0;
+        const clickSound = new Audio('click-sound.mp3.mpeg');
 
         function mostrarPregunta() {
             const preguntaTexto = document.getElementById("pregunta-text");
@@ -187,6 +188,7 @@
 
             if (preguntaActual < preguntas.length) {
                 mostrarPregunta();
+                clickSound.play()
             } else {
                 // Guarda la puntuación en localStorage en el formato correcto
                 let puntuaciones = JSON.parse(localStorage.getItem("puntuaciones")) || {};
@@ -199,6 +201,7 @@
 
                 // Redirige a la página de clasificación al terminar
                 window.location.href = "clasificacion.html";
+                clickSound.play()
             }
         }
 

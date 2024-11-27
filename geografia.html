@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Geografía</title>
+</head>
+
+<body>
+    <header>
+        <div class="banner">
+            <img src="Trivia Banner.jpg" alt="" class="banner-img">
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="clasificacion.html">Puntuación</a></li>
+                <li><a href="sugerencias.html">Sugerencias</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="preguntas-section">
+        <h2>Responde las siguientes preguntas</h2>
+
+        <div id="pregunta-container">
+            <p id="pregunta-text"></p>
+
+            <div class="opciones-container">
+                <button class="opcion" onclick="seleccionarRespuesta(0), clickSound.play();">Opción 1</button>
+                <button class="opcion" onclick="seleccionarRespuesta(1), clickSound.play();">Opción 2</button>
+                <button class="opcion" onclick="seleccionarRespuesta(2), clickSound.play();">Opción 3</button>
+                <button class="opcion" onclick="seleccionarRespuesta(3), clickSound.play();">Opción 4</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+
+        const preguntasGeografia = [
+            {
+                pregunta: "¿Cuál es el río más largo del mundo?",
+                opciones: ["El Amazonas", "El Nilo", "El Yangtsé", "El Misisipi"],
+                respuestaCorrecta: 0
+            },
+            {
+                pregunta: "¿Cuál es el país más grande del mundo por superficie?",
+                opciones: ["Canadá", "Rusia", "China", "Estados Unidos"],
+                respuestaCorrecta: 1
+            },
+            {
+                pregunta: "¿En qué continente se encuentra el desierto del Sahara?",
+                opciones: ["Asia", "América", "África", "Australia"],
+                respuestaCorrecta: 2
+            },
+            {
+                pregunta: "¿Cuál es el país con más habitantes del mundo?",
+                opciones: ["India", "Estados Unidos", "Indonesia", "China"],
+                respuestaCorrecta: 3
+            },
+            {
+                pregunta: "¿Qué océano es el más grande del mundo?",
+                opciones: ["Atlántico", "Pacífico", "Índico", "Ártico"],
+                respuestaCorrecta: 1
+            },
+            {
+                pregunta: "¿Qué montaña es la más alta del mundo?",
+                opciones: ["El Monte Everest", "El K2", "El Kilimanjaro", "El Aconcagua"],
+                respuestaCorrecta: 0
+            },
+            {
+                pregunta: "¿Cuál es la capital de Australia?",
+                opciones: ["Sídney", "Melbourne", "Canberra", "Perth"],
+                respuestaCorrecta: 2
+            },
+            {
+                pregunta: "¿Cuál es el país más pequeño del mundo?",
+                opciones: ["Grecia", "Italia", "Ciudad del Vaticano", "Portugal"],
+                respuestaCorrecta: 2
+            },
+            {
+                pregunta: "¿Cuál es la isla más grande del mundo?",
+                opciones: ["Madagascar", "Groenlandia", "Nueva Guinea", "Borneo"],
+                respuestaCorrecta: 1
+            },
+            {
+                pregunta: "¿En qué hemisferio se encuentra la Antártida?",
+                opciones: ["Hemisferio Norte", "Hemisferio Sur", "Hemisferio Este", "Hemisferio Oeste"],
+                respuestaCorrecta: 1
+            }
+        ];
+
+        let preguntaActual = 0;
+        let respuestasCorrectas = 0;
+        const clickSound = new Audio('click-sound.mp3.mpeg');
+
+        // Muestra la primera pregunta
+        function mostrarPregunta() {
+            const preguntaTexto = document.getElementById("pregunta-text");
+            const opciones = document.querySelectorAll(".opcion");
+
+            // Actualiza el texto de la pregunta
+            preguntaTexto.textContent = preguntasGeografia[preguntaActual].pregunta;
+
+            // Actualiza las opciones de respuesta
+            opciones.forEach((boton, index) => {
+                boton.textContent = preguntasGeografia[preguntaActual].opciones[index];
+            });
+        }
+
+        // Lógica para seleccionar una respuesta
+        function seleccionarRespuesta(opcionSeleccionada) {
+            if (opcionSeleccionada === preguntasGeografia[preguntaActual].respuestaCorrecta) {
+                respuestasCorrectas++;
+            }
+
+            // Avanza a la siguiente pregunta
+            preguntaActual++;
+
+            if (preguntaActual < preguntasGeografia.length) {
+                mostrarPregunta();
+            } else {
+                // Guarda la puntuación en localStorage en el formato correcto
+                let puntuaciones = JSON.parse(localStorage.getItem("puntuaciones")) || {};
+                puntuaciones["puntuacion_Geografia"] = {
+                    categoria: "Geografía",
+                    correctas: respuestasCorrectas,
+                    total: preguntasGeografia.length
+                };
+                localStorage.setItem("puntuaciones", JSON.stringify(puntuaciones));
+
+                // Redirige a la página de clasificación al terminar
+                window.location.href = "clasificacion.html";
+            }
+        }
+
+        // Inicializa el juego mostrando la primera pregunta
+        window.onload = mostrarPregunta;
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Preguntas Revueltas</title>
+</head>
+
+<body>
+    <header>
+        <div class="banner">
+            <img src="Trivia Banner.jpg" alt="" class="banner-img">
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="clasificacion.html">Puntuación</a></li>
+                <li><a href="sugerencias.html">Sugerencias</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="preguntas-section">
+        <h2>Responde las siguientes preguntas</h2>
+
+        <div id="pregunta-container">
+            <p id="pregunta-text"></p>
+
+            <!-- Contenedor de videos, solo visible en la primera pregunta -->
+            <div id="video-container" style="display: none;">
+                <div class="tabs">
+                    <button class="tab-button" onclick="mostrarVideo(0)">Video con Subtítulos</button>
+                    <button class="tab-button" onclick="mostrarVideo(1)">Video con Audio Descriptivo</button>
+                </div>
+                <div class="video-content">
+                    <iframe
+                        id="video-0"
+                        width="560"
+                        height="315"
+                        src="https://www.youtube.com/embed/Gz1IQT9UEoI?si=Hnl2NIc_U1HnTKym"
+                        title="Video 1"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                    <iframe
+                        id="video-1"
+                        width="560"
+                        height="315"
+                        src="https://www.youtube.com/embed/5BUxugU6yq0?si=L4li6GznUHls3In9"
+                        title="Video 2"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                        style="display: none;">
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="opciones-container">
+                <button class="opcion" onclick="seleccionarRespuesta(0), clickSound.play();">Opción 1</button>
+                <button class="opcion" onclick="seleccionarRespuesta(1), clickSound.play();">Opción 2</button>
+                <button class="opcion" onclick="seleccionarRespuesta(2), clickSound.play();">Opción 3</button>
+                <button class="opcion" onclick="seleccionarRespuesta(3), clickSound.play();">Opción 4</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+                const preguntasVariadas = [
+            {
+                pregunta: "Mira el video y responde. ¿Cuál es el planeta más grande del sistema solar?",
+                opciones: ["Marte", "Tierra", "Júpiter", "Saturno"],
+                respuestaCorrecta: 2
+            },
+            {
+                pregunta: "¿Qué animal es conocido como el rey de la selva?",
+                opciones: ["El león", "El tigre", "El elefante", "El oso"],
+                respuestaCorrecta: 0
+            },
+            {
+                pregunta: "¿Quién escribió la obra *Romeo y Julieta*?",
+                opciones: ["Miguel de Cervantes", "William Shakespeare", "Victor Hugo", "Homero"],
+                respuestaCorrecta: 1
+            },
+            {
+                pregunta: "¿Qué símbolo químico representa al oro?",
+                opciones: ["Ag", "Au", "Gd", "O"],
+                respuestaCorrecta: 1
+            },
+            {
+                pregunta: "¿En qué año llegó el hombre a la Luna?",
+                opciones: ["1965", "1969", "1972", "1975"],
+                respuestaCorrecta: 1
+            },
+            {
+                pregunta: "¿Qué deporte se juega con un bate y una pelota en un campo en forma de diamante?",
+                opciones: ["Cricket", "Baseball", "Golf", "Hockey"],
+                respuestaCorrecta: 1
+            },
+            {
+                pregunta: "¿Cuál es el idioma más hablado en el mundo?",
+                opciones: ["Español", "Inglés", "Chino mandarín", "Hindi"],
+                respuestaCorrecta: 2
+            },
+            {
+                pregunta: "¿Qué país es famoso por su torre inclinada?",
+                opciones: ["Italia", "Francia", "España", "Grecia"],
+                respuestaCorrecta: 0
+            },
+            {
+                pregunta: "¿Cuál es la capital de Japón?",
+                opciones: ["Tokio", "Osaka", "Kioto", "Nagasaki"],
+                respuestaCorrecta: 0
+            },
+            {
+                pregunta: "¿En qué año se estrenó la primera película de *Harry Potter*?",
+                opciones: ["1999", "2001", "2003", "2005"],
+                respuestaCorrecta: 1
+            }
+        ];
+
+        let preguntaActual = 0;
+        let respuestasCorrectas = 0;
+        const clickSound = new Audio('click-sound.mp3.mpeg');
+
+        function mostrarPregunta() {
+            const preguntaTexto = document.getElementById("pregunta-text");
+            const opciones = document.querySelectorAll(".opcion");
+            const videoContainer = document.getElementById("video-container");
+
+            preguntaTexto.textContent = preguntasVariadas[preguntaActual].pregunta;
+            opciones.forEach((boton, index) => {
+                boton.textContent = preguntasVariadas[preguntaActual].opciones[index];
+            });
+
+            // Mostrar u ocultar el contenedor de videos según la pregunta actual
+            if (preguntaActual === 0) {
+                videoContainer.style.display = "block";
+            } else {
+                videoContainer.style.display = "none";
+            }
+        }
+
+        function mostrarVideo(videoIndex) {
+            const videos = document.querySelectorAll(".video-content iframe");
+            videos.forEach((video, index) => {
+                video.style.display = index === videoIndex ? "block" : "none";
+            });
+        }
+
+        // Lógica para seleccionar una respuesta
+        function seleccionarRespuesta(opcionSeleccionada) {
+            if (opcionSeleccionada === preguntasVariadas[preguntaActual].respuestaCorrecta) {
+                respuestasCorrectas++;
+            }
+    
+            // Avanza a la siguiente pregunta
+            preguntaActual++;
+    
+            if (preguntaActual < preguntasVariadas.length) {
+                mostrarPregunta();
+                clickSound.play()
+            } else {
+                // Guarda la puntuación en localStorage en el formato correcto
+                let puntuaciones = JSON.parse(localStorage.getItem("puntuaciones")) || {};
+                puntuaciones["puntuacion_Variadas"] = {
+                    categoria: "Preguntas Revueltas",
+                    correctas: respuestasCorrectas,
+                    total: preguntasVariadas.length
+                };
+                localStorage.setItem("puntuaciones", JSON.stringify(puntuaciones));
+    
+                // Redirige a la página de clasificación al terminar
+                clickSound.play()
+                window.location.href = "clasificacion.html";
+            }
+        }
+    
+        // Inicializa el juego mostrando la primera pregunta
+        window.onload = mostrarPregunta;
+    </script>
+</body>
+
+</html>

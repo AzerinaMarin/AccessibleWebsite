@@ -20,9 +20,6 @@
         </nav>
     </header>
     
-
-    
-    <!-- Sección de preguntas de Cultura General -->
     <section class="preguntas-section">
         <h2>Responde las siguientes preguntas</h2>
 
@@ -30,10 +27,10 @@
             <p id="pregunta-text"></p>
 
             <div class="opciones-container">
-                <button class="opcion" onclick="seleccionarRespuesta(0)">Opción 1</button>
-                <button class="opcion" onclick="seleccionarRespuesta(1)">Opción 2</button>
-                <button class="opcion" onclick="seleccionarRespuesta(2)">Opción 3</button>
-                <button class="opcion" onclick="seleccionarRespuesta(3)">Opción 4</button>
+                <button class="opcion" onclick="seleccionarRespuesta(0), clickSound.play()">Opción 1</button>
+                <button class="opcion" onclick="seleccionarRespuesta(1), clickSound.play()">Opción 2</button>
+                <button class="opcion" onclick="seleccionarRespuesta(2), clickSound.play()">Opción 3</button>
+                <button class="opcion" onclick="seleccionarRespuesta(3), clickSound.play()">Opción 4</button>
             </div>
         </div>
     </section>
@@ -95,6 +92,7 @@
     
         let preguntaActual = 0;
         let respuestasCorrectas = 0;
+        const clickSound = new Audio('click-sound.mp3.mpeg');
     
         // Muestra la primera pregunta
         function mostrarPregunta() {
