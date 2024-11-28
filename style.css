@@ -53,7 +53,7 @@ nav {
 }
 
 /* Sección de presentación */
-.presentacion-section, .instrucciones-section, .revueltas-section, .categorias-section {
+.presentacion-section, .instrucciones-section, .revueltas-section, .categorias-section, .indicaciones, .sugerencia {
     padding: 20px;
     text-align: center;
     background-color: #fbeee5;
@@ -62,7 +62,7 @@ nav {
 
 /* Botón de preguntas revueltas */
 .revueltas-section button {
-    background-color: #6d73ff;
+    background-color: #0f5164;
     color: white;
     padding: 15px 30px;
     font-size: 18px;
@@ -266,7 +266,7 @@ nav {
         padding: 10px;
         font-size: 1em;
         color: white;
-        background-color: #007bff;
+        background-color: #005bbb;
         border: none;
         border-radius: 5px;
         cursor: pointer;
@@ -308,7 +308,7 @@ nav {
     }
 
     [role="checkbox"][aria-checked="true"] {
-        background-color: #007bff;
+        background-color: #005bbb;
         color: white;
         border-color: #0056b3;
     }
@@ -352,7 +352,7 @@ nav {
     padding: 10px 20px;
     margin: 0 5px;
     border: none;
-    background-color: #007BFF;
+    background-color: #860081;
     color: white;
     cursor: pointer;
     border-radius: 5px;
@@ -361,7 +361,7 @@ nav {
 }
 
 .tab-button:hover {
-    background-color: #0056b3;
+    background-color: #8a25a3;
 }
 
 .video-content {
